@@ -54,6 +54,18 @@ func main() {
 	http.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
 		handlers.LogoutHandler(w, r, db)
 	})
+	http.HandleFunc("/create-post", func(w http.ResponseWriter, r *http.Request) {
+		handlers.CreatePostHandler(w, r, db)
+	})
+	http.HandleFunc("/post", func(w http.ResponseWriter, r *http.Request) {
+		handlers.PostDetailHandler(w, r, db)
+	})
+	http.HandleFunc("/like", func(w http.ResponseWriter, r *http.Request) {
+		handlers.LikeHandler(w, r, db)
+	})
+	http.HandleFunc("/comment", func(w http.ResponseWriter, r *http.Request) {
+		handlers.CommentHandler(w, r, db)
+	})
 	// 5. Start the server
 	fmt.Println("🚀 Server is running! Open your browser and go to: http://localhost:8080")
 	err = http.ListenAndServe(":8080", nil)

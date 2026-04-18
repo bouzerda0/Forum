@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Post.Title}} - Forum</title>
+    <link rel="stylesheet" href="/static/homepage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .post-detail-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .post-header {
+            margin-bottom: 2rem;
+        }
+
+        .post-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            letter-spacing: -0.025em;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            background: #f1f5f9;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .post-body {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: var(--text-main);
+            margin-bottom: 3rem;
+            white-space: pre-wrap;
+        }
+
+        .comment-section {
+            padding-top: 3rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .comment-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .comment-form {
+            margin-bottom: 3rem;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            height: 100px;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            background: var(--white);
+            font-family: inherit;
+            font-size: 0.9375rem;
+            resize: vertical;
+            margin-bottom: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .comment-form textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .btn-submit-comment {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-submit-comment:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .comment-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .comment-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .comment-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .comment-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .comment-author img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+        }
+
+        .comment-content {
+            font-size: 0.9375rem;
+            line-height: 1.5;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        .comment-stats {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .post-detail-container {
+                padding: 1.5rem;
+                border-radius: 0;
+                margin: 0;
+                border: none;
+            }
+            .post-header h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main" style="margin-left: 0; width: 100%;">
+        <header class="navbar">
+            <div class="nav-left">
+                <a href="/" class="logo" style="margin-bottom: 0; font-size: 1.25rem;">
+                    <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                        <path d="M26 6H6C4.89543 6 4 6.89543 4 8V20C4 21.1046 4.89543 22 6 22H11L9.5 25.5C9.22386 26.1213 9.77614 26.5 10.5 26.5C11.2239 26.5 14.5 22 14.5 22H26C27.1046 22 28 21.1046 28 20V8C28 6.89543 27.1046 6 26 6Z" stroke="#0066FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span>Forum</span>
+                </a>
+            </div>
+            <div class="navbar-right">
+                <a href="/" class="btn-view">Back Home</a>
+            </div>
+        </header>
+
+        <main class="content">
+            <article class="post-detail-container">
+                <header class="post-header">
+                    <div class="post-tags">
+                        {{range .Post.Categories}}
+                        <span class="tag">{{.}}</span>
+                        {{end}}
+                    </div>
+                    <h1>{{.Post.Title}}</h1>
+                    <div class="author">
+                        <img src="https://i.pravatar.cc/150?u={{.Post.Author}}" alt="">
+                        <span>{{.Post.Author}} • {{.Post.CreatedAt.Format "Jan 02, 2006"}}</span>
+                    </div>
+                </header>
+
+                <div class="post-body">
+                    {{.Post.Content}}
+                </div>
+
+                <div class="card-meta" style="padding: 1.5rem 0; border-bottom: 1px solid var(--border);">
+                    <div class="stats-actions">
+                        <form action="/like" method="POST" class="like-form">
+                            <input type="hidden" name="type" value="post">
+                            <input type="hidden" name="id" value="{{.Post.ID}}">
+                            <button type="submit" name="value" value="1" class="action-btn like-btn {{if eq .Post.UserLike 1}}active{{end}}">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                                <span>{{.Post.LikesCount}} Likes</span>
+                            </button>
+                            <button type="submit" name="value" value="-1" class="action-btn dislike-btn {{if eq .Post.UserLike -1}}active{{end}}">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"/></svg>
+                                <span>{{.Post.DislikesCount}}</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <section class="comment-section">
+                    <h2>Comments ({{.Post.CommentsCount}})</h2>
+
+                    {{if .IsLoggedIn}}
+                    <form action="/comment" method="POST" class="comment-form">
+                        <input type="hidden" name="post_id" value="{{.Post.ID}}">
+                        <textarea name="content" placeholder="Share your thoughts..." required></textarea>
+                        <button type="submit" class="btn-submit-comment">Post Comment</button>
+                    </form>
+                    {{else}}
+                    <div class="comment-form" style="text-align: center;">
+                        <p>Please <a href="/login">log in</a> to join the discussion.</p>
+                    </div>
+                    {{end}}
+
+                    <div class="comments-list">
+                        {{range .Comments}}
+                        <div class="comment-card">
+                            <div class="comment-meta">
+                                <div class="comment-author">
+                                    <img src="https://i.pravatar.cc/150?u={{.Author}}" alt="">
+                                    <span>{{.Author}}</span>
+                                </div>
+                                <span style="font-size: 0.75rem; color: var(--text-muted);">{{.CreatedAt.Format "Jan 02, 15:04"}}</span>
+                            </div>
+                            <div class="comment-content">
+                                {{.Content}}
+                            </div>
+                            <div class="comment-stats">
+                                <form action="/like" method="POST" class="like-form">
+                                    <input type="hidden" name="type" value="comment">
+                                    <input type="hidden" name="id" value="{{.ID}}">
+                                    <button type="submit" name="value" value="1" class="action-btn like-btn {{if eq .UserLike 1}}active{{end}}" style="transform: scale(0.9);">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                                        <span>{{.LikesCount}}</span>
+                                    </button>
+                                    <button type="submit" name="value" value="-1" class="action-btn dislike-btn {{if eq .UserLike -1}}active{{end}}" style="transform: scale(0.9);">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"/></svg>
+                                        <span>{{.DislikesCount}}</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        {{else}}
+                        <p style="text-align: center; color: var(--text-muted); padding: 2rem;">No comments yet. Be the first to say something!</p>
+                        {{end}}
+                    </div>
+                </section>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

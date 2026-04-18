@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum - Create Post</title>
+    <link rel="stylesheet" href="/static/login&register.css">
+    <style>
+        .categories-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .category-item input {
+            display: none;
+        }
+        .category-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+        }
+        .category-chip:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #f0f7ff;
+        }
+        .category-item input:checked + .category-chip {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            transform: translateY(-1px);
+        }
+        .check-icon {
+            display: none;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.2s;
+        }
+        .category-item input:checked + .category-chip .check-icon {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+        textarea.post-content {
+            width: 100%;
+            height: 180px;
+            padding: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--input-radius);
+            background-color: var(--input-bg);
+            color: var(--text-main);
+            resize: vertical;
+            font-family: inherit;
+            font-size: 15px;
+            line-height: 1.5;
+            transition: all 0.2s;
+            outline: none;
+        }
+        textarea.post-content:focus {
+            border-color: var(--primary);
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Forum</span>
+    </div>
+
+    <div class="main-card" style="max-width: 600px;">
+        <div class="card-header">
+            <div class="icon">✍️</div>
+            <h2>Create a New Post</h2>
+            <p>Share your thoughts with the community.</p>
+        </div>
+
+        {{if .Error}}
+        <div class="error-alert">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <span>{{.Error}}</span>
+        </div>
+        {{end}}
+
+        <div class="form-section">
+            <form action="/create-post" method="POST">
+                
+                <div class="input-container">
+                    <label for="title">Title</label>
+                    <div class="input-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" class="input-icon" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20h9"></path>
+                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                        </svg>
+                        <input type="text" id="title" name="title" placeholder="Give your post a catchy title" required autofocus>
+                    </div>
+                </div>
+
+                <div class="input-container">
+                    <label for="content">Content</label>
+                    <textarea id="content" name="content" class="post-content" placeholder="What's on your mind?" required></textarea>
+                </div>
+
+                <div class="input-container">
+                    <label>Categories (Select at least one)</label>
+                    <div class="categories-grid">
+                        {{range .Categories}}
+                        <div class="category-item">
+                            <input type="checkbox" name="categories" value="{{.ID}}" id="cat-{{.ID}}">
+                            <label for="cat-{{.ID}}" class="category-chip">
+                                <span>{{.Name}}</span>
+                                <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </label>
+                        </div>
+                        {{end}}
+                    </div>
+                </div>
+
+                <button type="submit" style="margin-top: 20px;">
+                    <span>Publish Post</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </form>
+        </div>
+        
+        <div class="footer-text">
+            Changed your mind? <a href="/">Back to Home</a>
+        </div>
+    </div>
+
+</body>
+
+</html>
