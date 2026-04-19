@@ -53,22 +53,47 @@
 
         <p class="sidebar-label">Quick actions</p>
         <a href="/create-post" style="text-decoration: none;"><button class="btn-create" style="width: 100%;">+ Create Post</button></a>
-        <ul class="nav-list">
-            <li><a href="/" style="text-decoration:none; color:inherit; display:flex; align-items:center; gap:8px;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="20" x2="18" y2="10" />
-                    <line x1="12" y1="20" x2="12" y2="4" />
-                    <line x1="6" y1="20" x2="6" y2="14" />
-                </svg> All Posts</a></li>
-            {{range .Categories}}
-            <li>
-                <a href="/?category={{.Name}}" style="text-decoration:none; color:inherit; display:flex; align-items:center; gap:8px;">
-                    <span style="width:8px; height:8px; border-radius:50%; background:currentColor; display:inline-block;"></span>
-                    {{.Name}}
-                </a>
-            </li>
+        <div class="sidebar-categories">
+            <a href="/" class="sidebar-cat-card sidebar-cat-all">
+                <div class="sidebar-cat-icon-wrap sidebar-cat-icon-all">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10" />
+                        <line x1="12" y1="20" x2="12" y2="4" />
+                        <line x1="6" y1="20" x2="6" y2="14" />
+                    </svg>
+                </div>
+                <span class="sidebar-cat-name">All Posts</span>
+                <svg class="sidebar-cat-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            {{$colors := mkSlice "cat-violet" "cat-emerald" "cat-amber" "cat-rose" "cat-sky" "cat-teal" "cat-fuchsia" "cat-lime"}}
+            {{$icons := mkSlice "general" "tech" "gaming" "movies" "science" "music" "art" "sports"}}
+            {{range $i, $cat := .Categories}}
+            <a href="/?category={{$cat.Name}}" class="sidebar-cat-card" data-color="{{index $colors (mod $i (len $colors))}}">
+                <div class="sidebar-cat-icon-wrap {{index $colors (mod $i (len $colors))}}">
+                    {{$iconType := index $icons (mod $i (len $icons))}}
+                    {{if eq $iconType "general"}}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 13h6"/></svg>
+                    {{else if eq $iconType "tech"}}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    {{else if eq $iconType "gaming"}}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>
+                    {{else if eq $iconType "movies"}}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+                    {{else if eq $iconType "science"}}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v7l5 8H4l5-8V3z"/><line x1="8" y1="3" x2="16" y2="3"/></svg>
+                    {{else if eq $iconType "music"}}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    {{else if eq $iconType "art"}}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="0.5" fill="currentColor"/><circle cx="17.5" cy="10.5" r="0.5" fill="currentColor"/><circle cx="8.5" cy="7.5" r="0.5" fill="currentColor"/><circle cx="6.5" cy="12.5" r="0.5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+                    {{else}}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                    {{end}}
+                </div>
+                <span class="sidebar-cat-name">{{$cat.Name}}</span>
+                <svg class="sidebar-cat-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
             {{end}}
-        </ul>
+        </div>
 
         {{if .IsLoggedIn}}
         <div class="sidebar-footer">
@@ -132,7 +157,9 @@
 
                 {{if .IsLoggedIn}}
                 <div class="user-profile">
-                    <img src="https://i.pravatar.cc/150?u=jane" alt="User Avatar">
+                    <div class="user-avatar-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
                     <span>{{.Username}}</span>
 
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -171,7 +198,12 @@
                         </div>
                         
                         <div class="card-meta">
-                            <div class="author"><img src="https://i.pravatar.cc/150?u={{.Author}}" alt=""> {{.Author}}</div>
+                            <div class="author">
+                                <div class="user-avatar-icon mini">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                </div>
+                                {{.Author}}
+                            </div>
                             
                             <div class="stats-actions">
                                 <form action="/like" method="POST" class="like-form">
@@ -183,6 +215,7 @@
                                     </button>
                                     <button type="submit" name="value" value="-1" class="action-btn dislike-btn {{if eq .UserLike -1}}active{{end}}">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"/></svg>
+                                        <span>{{.DislikesCount}}</span>
                                     </button>
                                 </form>
 
@@ -200,55 +233,30 @@
                 </div>
             </section>
 
-            <!-- Recently Active Categories -->
+            <!-- Forum Members -->
             <section>
                 <div class="section-head">
-                    <h2>Recently Active Categories</h2>
+                    <h2>Forum Members</h2>
                     <button class="btn-view">View All</button>
                 </div>
-                <div class="cat-grid">
-                    <div class="cat-card">
-                        <div class="cat-icon blue"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="#fff" stroke-width="2">
-                                <rect x="2" y="3" width="20" height="14" rx="2" />
-                                <line x1="8" y1="21" x2="16" y2="21" />
-                                <line x1="12" y1="17" x2="12" y2="21" />
-                            </svg></div><span>Tech Support</span>
+                <div class="members-grid">
+                    {{if .Members}}
+                    {{$memberColors := mkSlice "#7c3aed" "#059669" "#d97706" "#e11d48" "#0284c7" "#0d9488" "#c026d3" "#65a30d"}}
+                    {{$memberBgs := mkSlice "#f5f3ff" "#ecfdf5" "#fffbeb" "#fff1f2" "#f0f9ff" "#f0fdfa" "#fdf4ff" "#f7fee7"}}
+                    {{range $i, $member := .Members}}
+                    <div class="member-card">
+                        <div class="member-avatar" style="background: {{index $memberBgs (mod $i (len $memberBgs))}}; color: {{index $memberColors (mod $i (len $memberColors))}};">
+                            {{$member.Initial}}
+                        </div>
+                        <div class="member-info">
+                            <span class="member-name">{{$member.Username}}</span>
+                            <span class="member-role">Member</span>
+                        </div>
                     </div>
-                    <div class="cat-card">
-                        <div class="cat-icon navy"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="#fff" stroke-width="2">
-                                <path d="M11 5L6 9H2V15H6L11 19V5Z" />
-                                <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                            </svg></div><span>Community Announcements</span>
-                    </div>
-                    <div class="cat-card">
-                        <div class="cat-icon green"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="#fff" stroke-width="2">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                <path d="M8 9h8" />
-                                <path d="M8 13h6" />
-                            </svg></div><span>General Chat</span>
-                    </div>
-                    <div class="cat-card">
-                        <div class="cat-icon orange"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="#fff" stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                                <circle cx="9" cy="7" r="4" />
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                            </svg></div><span>Roumtsdown</span>
-                    </div>
-                    <div class="cat-card">
-                        <div class="cat-icon red"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="#fff" stroke-width="2">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                <path d="M8 10h.01" />
-                                <path d="M12 10h.01" />
-                                <path d="M16 10h.01" />
-                            </svg></div><span>Community</span>
-                    </div>
+                    {{end}}
+                    {{else}}
+                    <p style="color: var(--text-muted); padding: 20px;">No members yet.</p>
+                    {{end}}
                 </div>
             </section>
         </main>

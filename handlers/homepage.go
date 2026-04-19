@@ -93,6 +93,31 @@ func HomeHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 		posts = append(posts, p)
 	}
+	// Fetch Members (registered users)
+	memberRows, err := db.Query("SELECT id, username, created_at FROM users ORDER BY created_at DESC LIMIT 10")
+	if err != nil {
+		log.Println("Error fetching members:", err)
+	}
+	type Member struct {
+		ID        int
+		Username  string
+		CreatedAt string
+		Initial   string
+	}
+	var members []Member
+	if memberRows != nil {
+		defer memberRows.Close()
+		for memberRows.Next() {
+			var m Member
+			var createdAt interface{}
+			if err := memberRows.Scan(&m.ID, &m.Username, &createdAt); err == nil {
+				if m.Username != "" {
+					m.Initial = string([]rune(m.Username)[0])
+				}
+				members = append(members, m)
+			}
+		}
+	}
 
 	// 3. Prepare the data for HTML
 	data := map[string]interface{}{
@@ -100,6 +125,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		"Username":   username,
 		"Categories": categories,
 		"Posts":      posts,
+		"Members":   members,
 	}
 
 	// 4. Prevent browser caching (So Logout works perfectly)

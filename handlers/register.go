@@ -19,7 +19,12 @@ var (
 var tmpl *template.Template
 
 func init() {
-	tmpl = template.Must(template.ParseGlob("templates/*.html"))
+	funcMap := template.FuncMap{
+		"mkSlice": func(args ...string) []string { return args },
+		"mod":     func(a, b int) int { return a % b },
+		"mul":     func(a, b int) int { return a * b },
+	}
+	tmpl = template.Must(template.New("").Funcs(funcMap).ParseGlob("templates/*.html"))
 }
 func RegisterHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	// 1. If GET request: Show the register page
