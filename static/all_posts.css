@@ -1,0 +1,151 @@
+/* === ALL POSTS PAGE STYLES === */
+
+.all-posts-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: calc(100vh - 72px);
+}
+
+.ap-hero {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
+    border-radius: 1.5rem;
+    margin-bottom: 3rem;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.ap-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0.5;
+    transform: rotate(30deg);
+}
+
+.ap-hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+    letter-spacing: -0.05em;
+}
+
+.ap-hero p {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.ap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+/* Enhancing the existing .disc-card for the grid */
+.ap-grid .disc-card {
+    height: 100%;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+}
+
+.ap-grid .disc-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1), 0 8px 10px -6px rgba(37, 99, 235, 0.1);
+    border-color: #bfdbfe;
+    background: var(--white);
+}
+
+.ap-grid .card-content {
+    flex-grow: 1;
+}
+
+.ap-grid .post-title {
+    font-size: 1.25rem;
+    background: linear-gradient(90deg, var(--text-main), var(--text-main));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: var(--transition);
+}
+
+.ap-grid .disc-card:hover .post-title {
+    background: linear-gradient(90deg, var(--primary), #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.ap-grid .disc-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+/* Delay for stagger effect */
+.ap-grid .disc-card:nth-child(1) { animation-delay: 0.1s; }
+.ap-grid .disc-card:nth-child(2) { animation-delay: 0.15s; }
+.ap-grid .disc-card:nth-child(3) { animation-delay: 0.2s; }
+.ap-grid .disc-card:nth-child(4) { animation-delay: 0.25s; }
+.ap-grid .disc-card:nth-child(5) { animation-delay: 0.3s; }
+.ap-grid .disc-card:nth-child(6) { animation-delay: 0.35s; }
+.ap-grid .disc-card:nth-child(n+7) { animation-delay: 0.4s; }
+
+/* Empty state */
+.ap-empty {
+    text-align: center;
+    padding: 5rem 2rem;
+    grid-column: 1 / -1;
+    background: var(--white);
+    border-radius: 1rem;
+    border: 1px dashed var(--border);
+}
+
+.ap-empty svg {
+    color: #cbd5e1;
+    margin-bottom: 1rem;
+}
+
+.ap-empty h3 {
+    font-size: 1.5rem;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.ap-empty p {
+    color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+    .all-posts-container {
+        padding: 1rem;
+    }
+    .ap-hero {
+        padding: 2rem 1rem;
+        border-radius: 1rem;
+    }
+    .ap-hero h1 {
+        font-size: 2rem;
+    }
+    .ap-grid {
+        gap: 1rem;
+        grid-template-columns: 1fr;
+    }
+}

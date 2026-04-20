@@ -19,12 +19,14 @@ var (
 var tmpl *template.Template
 
 func init() {
-	funcMap := template.FuncMap{
-		"mkSlice": func(args ...string) []string { return args },
-		"mod":     func(a, b int) int { return a % b },
-		"mul":     func(a, b int) int { return a * b },
-	}
-	tmpl = template.Must(template.New("").Funcs(funcMap).ParseGlob("templates/*.html"))
+	tmpl = template.Must(template.New("").Funcs(template.FuncMap{
+		"mkSlice": func(args ...interface{}) []interface{} {
+			return args
+		},
+		"mod": func(i, j int) int {
+			return i % j
+		},
+	}).ParseGlob("templates/*.html"))
 }
 func RegisterHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	// 1. If GET request: Show the register page
@@ -85,6 +87,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		}
 		///////Password check\\\\
 		password := r.FormValue("password")
+		password = strings.TrimSpace(password)
 		// 3. Hash the password before saving it
 		if len(password) > 72 {
 			w.WriteHeader(http.StatusBadRequest) // 400 Bad Request

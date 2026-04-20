@@ -157,10 +157,10 @@
                         {{$colors := mkSlice "#7c3aed" "#059669" "#d97706" "#e11d48" "#0284c7" "#0d9488" "#c026d3" "#65a30d"}}
                         {{$bgs := mkSlice "#f5f3ff" "#ecfdf5" "#fffbeb" "#fff1f2" "#f0f9ff" "#f0fdfa" "#fdf4ff" "#f7fee7"}}
                         {{range $i, $c := .Comments}}
-                        <div class="comment-item" style="animation-delay: {{mul $i 50}}ms;">
+                        <div class="comment-item stagger-{{mod $i 11}}">
                             <div class="comment-top">
                                 <div class="comment-author-info">
-                                    <div class="comment-avatar" style="background: {{index $bgs (mod $i (len $bgs))}}; color: {{index $colors (mod $i (len $colors))}};">
+                                    <div class="comment-avatar avatar-{{mod $i 8}}">
                                         {{index $c.Author 0 | printf "%c"}}
                                     </div>
                                     <span class="comment-author-name">{{$c.Author}}</span>

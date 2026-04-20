@@ -45,6 +45,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 	// Fetch Posts
 	categoryFilter := r.URL.Query().Get("category")
+	listFilter := r.URL.Query().Get("filter")
 	var postRows *sql.Rows
 
 	if categoryFilter != "" {
@@ -57,6 +58,23 @@ func HomeHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 			WHERE c.name = ?
 			ORDER BY p.created_at DESC
 		`, categoryFilter)
+	} else if listFilter == "myposts" && isLoggedIn {
+		postRows, err = db.Query(`
+			SELECT p.id, p.user_id, u.username, p.title, p.content, p.created_at
+			FROM posts p
+			JOIN users u ON p.user_id = u.id
+			WHERE p.user_id = ?
+			ORDER BY p.created_at DESC
+		`, userID)
+	} else if listFilter == "likedposts" && isLoggedIn {
+		postRows, err = db.Query(`
+			SELECT p.id, p.user_id, u.username, p.title, p.content, p.created_at
+			FROM posts p
+			JOIN users u ON p.user_id = u.id
+			JOIN likes l ON p.id = l.post_id
+			WHERE l.user_id = ? AND l.value = 1
+			ORDER BY p.created_at DESC
+		`, userID)
 	} else {
 		postRows, err = db.Query(`
 			SELECT p.id, p.user_id, u.username, p.title, p.content, p.created_at

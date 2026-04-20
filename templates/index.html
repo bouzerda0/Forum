@@ -43,54 +43,108 @@
                 </svg>
                 Dashboard
             </li>
-            <li>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                </svg>
-                Discussions
-            </li>
         </ul>
 
         <p class="sidebar-label">Quick actions</p>
-        <a href="/create-post" style="text-decoration: none;"><button class="btn-create" style="width: 100%;">+ Create Post</button></a>
+        <a href="/create-post" style="text-decoration: none;"><button class="btn-create" style="width: 100%;">+ Create
+                Post</button></a>
         <div class="sidebar-categories">
             <a href="/" class="sidebar-cat-card sidebar-cat-all">
                 <div class="sidebar-cat-icon-wrap sidebar-cat-icon-all">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <line x1="18" y1="20" x2="18" y2="10" />
                         <line x1="12" y1="20" x2="12" y2="4" />
                         <line x1="6" y1="20" x2="6" y2="14" />
                     </svg>
                 </div>
                 <span class="sidebar-cat-name">All Posts</span>
-                <svg class="sidebar-cat-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                <svg class="sidebar-cat-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 18 6-6-6-6" />
+                </svg>
             </a>
-            {{$colors := mkSlice "cat-violet" "cat-emerald" "cat-amber" "cat-rose" "cat-sky" "cat-teal" "cat-fuchsia" "cat-lime"}}
+            {{$colors := mkSlice "cat-violet" "cat-emerald" "cat-amber" "cat-rose" "cat-sky" "cat-teal" "cat-fuchsia"
+            "cat-lime"}}
             {{$icons := mkSlice "general" "tech" "gaming" "movies" "science" "music" "art" "sports"}}
             {{range $i, $cat := .Categories}}
-            <a href="/?category={{$cat.Name}}" class="sidebar-cat-card" data-color="{{index $colors (mod $i (len $colors))}}">
+            <a href="/?category={{$cat.Name}}" class="sidebar-cat-card"
+                data-color="{{index $colors (mod $i (len $colors))}}">
                 <div class="sidebar-cat-icon-wrap {{index $colors (mod $i (len $colors))}}">
                     {{$iconType := index $icons (mod $i (len $icons))}}
                     {{if eq $iconType "general"}}
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 13h6"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        <path d="M8 9h8" />
+                        <path d="M8 13h6" />
+                    </svg>
                     {{else if eq $iconType "tech"}}
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                    </svg>
                     {{else if eq $iconType "gaming"}}
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="6" y1="11" x2="10" y2="11" />
+                        <line x1="8" y1="9" x2="8" y2="13" />
+                        <line x1="15" y1="12" x2="15.01" y2="12" />
+                        <line x1="18" y1="10" x2="18.01" y2="10" />
+                        <path
+                            d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" />
+                    </svg>
                     {{else if eq $iconType "movies"}}
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="2.18" />
+                        <line x1="7" y1="2" x2="7" y2="22" />
+                        <line x1="17" y1="2" x2="17" y2="22" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <line x1="2" y1="7" x2="7" y2="7" />
+                        <line x1="2" y1="17" x2="7" y2="17" />
+                        <line x1="17" y1="17" x2="22" y2="17" />
+                        <line x1="17" y1="7" x2="22" y2="7" />
+                    </svg>
                     {{else if eq $iconType "science"}}
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v7l5 8H4l5-8V3z"/><line x1="8" y1="3" x2="16" y2="3"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 3h6v7l5 8H4l5-8V3z" />
+                        <line x1="8" y1="3" x2="16" y2="3" />
+                    </svg>
                     {{else if eq $iconType "music"}}
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18V5l12-2v13" />
+                        <circle cx="6" cy="18" r="3" />
+                        <circle cx="18" cy="16" r="3" />
+                    </svg>
                     {{else if eq $iconType "art"}}
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="0.5" fill="currentColor"/><circle cx="17.5" cy="10.5" r="0.5" fill="currentColor"/><circle cx="8.5" cy="7.5" r="0.5" fill="currentColor"/><circle cx="6.5" cy="12.5" r="0.5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="13.5" cy="6.5" r="0.5" fill="currentColor" />
+                        <circle cx="17.5" cy="10.5" r="0.5" fill="currentColor" />
+                        <circle cx="8.5" cy="7.5" r="0.5" fill="currentColor" />
+                        <circle cx="6.5" cy="12.5" r="0.5" fill="currentColor" />
+                        <path
+                            d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" />
+                    </svg>
                     {{else}}
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="16" />
+                        <line x1="8" y1="12" x2="16" y2="12" />
+                    </svg>
                     {{end}}
                 </div>
                 <span class="sidebar-cat-name">{{$cat.Name}}</span>
-                <svg class="sidebar-cat-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                <svg class="sidebar-cat-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 18 6-6-6-6" />
+                </svg>
             </a>
             {{end}}
         </div>
@@ -137,34 +191,29 @@
             </div>
 
             <nav class="nav-links">
-                <a href="#" class="active">Home</a>
-                <a href="#">Categories</a>
-                <a href="#">Members</a>
-
+                <a href="/" class="active">Home</a>
+                <a href="/create-post">Create Post</a>
+                <a href="/all-posts">All Posts</a>
                 {{if .IsLoggedIn}}
-                <a href="#">My Profile</a>
+                <a href="/?filter=myposts">My Posts</a>
+                <a href="/?filter=likedposts">Liked Posts</a>
                 {{end}}
             </nav>
 
             <div class="navbar-right">
                 <div class="search-box">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8" />
-                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                    </svg>
-                    <input type="text" placeholder="Search Forum">
                 </div>
 
                 {{if .IsLoggedIn}}
                 <div class="user-profile">
                     <div class="user-avatar-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
                     </div>
                     <span>{{.Username}}</span>
-
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="m6 9 6 6 6-6" />
-                    </svg>
                 </div>
                 <a href="/logout" class="btn-logout">
                     Logout
@@ -186,41 +235,59 @@
             <section>
                 <div class="section-head">
                     <h2>Top Discussions</h2>
-                    <button class="btn-view">View All</button>
+                    <button class="btn-view" onclick="window.location.href='/all-posts'">View All</button>
                 </div>
                 <div class="cards-row">
                     {{if .Posts}}
                     {{range .Posts}}
                     <article class="disc-card">
-                        <div class="card-content" onclick="window.location.href='/post?id={{.ID}}'" style="cursor: pointer;">
+                        <div class="card-content" onclick="window.location.href='/post?id={{.ID}}'"
+                            style="cursor: pointer;">
                             <h3 class="post-title">{{.Title}}</h3>
                             <p class="post-excerpt">{{.Content}}</p>
                         </div>
-                        
+
                         <div class="card-meta">
                             <div class="author">
                                 <div class="user-avatar-icon mini">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                        <circle cx="12" cy="7" r="4" />
+                                    </svg>
                                 </div>
                                 {{.Author}}
                             </div>
-                            
+
                             <div class="stats-actions">
                                 <form action="/like" method="POST" class="like-form">
                                     <input type="hidden" name="type" value="post">
                                     <input type="hidden" name="id" value="{{.ID}}">
-                                    <button type="submit" name="value" value="1" class="action-btn like-btn {{if eq .UserLike 1}}active{{end}}">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                                    <button type="submit" name="value" value="1"
+                                        class="action-btn like-btn {{if eq .UserLike 1}}active{{end}}">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path
+                                                d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
+                                        </svg>
                                         <span>{{.LikesCount}}</span>
                                     </button>
-                                    <button type="submit" name="value" value="-1" class="action-btn dislike-btn {{if eq .UserLike -1}}active{{end}}">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"/></svg>
+                                    <button type="submit" name="value" value="-1"
+                                        class="action-btn dislike-btn {{if eq .UserLike -1}}active{{end}}">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path
+                                                d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3" />
+                                        </svg>
                                         <span>{{.DislikesCount}}</span>
                                     </button>
                                 </form>
 
                                 <a href="/post?id={{.ID}}" class="action-btn comment-btn">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                                    </svg>
                                     <span>{{.CommentsCount}}</span>
                                 </a>
                             </div>
@@ -241,11 +308,13 @@
                 </div>
                 <div class="members-grid">
                     {{if .Members}}
-                    {{$memberColors := mkSlice "#7c3aed" "#059669" "#d97706" "#e11d48" "#0284c7" "#0d9488" "#c026d3" "#65a30d"}}
-                    {{$memberBgs := mkSlice "#f5f3ff" "#ecfdf5" "#fffbeb" "#fff1f2" "#f0f9ff" "#f0fdfa" "#fdf4ff" "#f7fee7"}}
+                    {{$memberColors := mkSlice "#7c3aed" "#059669" "#d97706" "#e11d48" "#0284c7" "#0d9488" "#c026d3"
+                    "#65a30d"}}
+                    {{$memberBgs := mkSlice "#f5f3ff" "#ecfdf5" "#fffbeb" "#fff1f2" "#f0f9ff" "#f0fdfa" "#fdf4ff"
+                    "#f7fee7"}}
                     {{range $i, $member := .Members}}
                     <div class="member-card">
-                        <div class="member-avatar" style="background: {{index $memberBgs (mod $i (len $memberBgs))}}; color: {{index $memberColors (mod $i (len $memberColors))}};">
+                        <div class="member-avatar avatar-{{mod $i 8}}">
                             {{$member.Initial}}
                         </div>
                         <div class="member-info">

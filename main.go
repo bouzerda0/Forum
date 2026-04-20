@@ -66,6 +66,9 @@ func main() {
 	http.HandleFunc("/comment", func(w http.ResponseWriter, r *http.Request) {
 		handlers.CommentHandler(w, r, db)
 	})
+	http.HandleFunc("/all-posts", func(w http.ResponseWriter, r *http.Request) {
+		handlers.AllPostsHandler(w, r, db)
+	})
 	// 5. Start the server
 	fmt.Println("🚀 Server is running! Open your browser and go to: http://localhost:8080")
 	err = http.ListenAndServe(":8080", nil)
