@@ -1,0 +1,7 @@
+.git
+.gitignore
+forum
+forum.db
+*.db
+*.db-journal
+README.md

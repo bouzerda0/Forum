@@ -5,76 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forum - Create Post</title>
-    <link rel="stylesheet" href="/static/login&register.css">
-    <style>
-        .categories-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .category-item input {
-            display: none;
-        }
-        .category-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 18px;
-            background: var(--input-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            user-select: none;
-        }
-        .category-chip:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: #f0f7ff;
-        }
-        .category-item input:checked + .category-chip {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-            transform: translateY(-1px);
-        }
-        .check-icon {
-            display: none;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.2s;
-        }
-        .category-item input:checked + .category-chip .check-icon {
-            display: block;
-            opacity: 1;
-            transform: scale(1);
-        }
-        textarea.post-content {
-            width: 100%;
-            height: 180px;
-            padding: 16px;
-            border: 1px solid var(--border-color);
-            border-radius: var(--input-radius);
-            background-color: var(--input-bg);
-            color: var(--text-main);
-            resize: vertical;
-            font-family: inherit;
-            font-size: 15px;
-            line-height: 1.5;
-            transition: all 0.2s;
-            outline: none;
-        }
-        textarea.post-content:focus {
-            border-color: var(--primary);
-            background-color: white;
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="/static/auth.css">
+    <link rel="stylesheet" href="/static/create_post.css">
 </head>
 
 <body>

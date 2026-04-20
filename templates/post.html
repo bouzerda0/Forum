@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{.Post.Title}} - Forum</title>
     <meta name="description" content="{{.Post.Title}} - Discussion on Forum">
-    <link rel="stylesheet" href="/static/homepage.css">
+    <link rel="stylesheet" href="/static/base.css">
     <link rel="stylesheet" href="/static/post.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -127,30 +127,7 @@
                         </h2>
                     </div>
 
-                    <!-- Comment Form -->
-                    {{if .IsLoggedIn}}
-                    <form action="/comment" method="POST" class="comment-compose">
-                        <input type="hidden" name="post_id" value="{{.Post.ID}}">
-                        <div class="compose-header">
-                            <div class="compose-avatar">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                            </div>
-                            <span class="compose-label">Share your thoughts</span>
-                        </div>
-                        <textarea name="content" class="comment-textarea" placeholder="Write a thoughtful comment..." required></textarea>
-                        <div class="compose-footer">
-                            <button type="submit" class="btn-publish">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                                Post Comment
-                            </button>
-                        </div>
-                    </form>
-                    {{else}}
-                    <div class="login-prompt">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;opacity:0.5;display:block;margin-left:auto;margin-right:auto;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                        <a href="/login">Log in</a> or <a href="/register">register</a> to join the discussion.
-                    </div>
-                    {{end}}
+
 
                     <!-- Comments List -->
                     <div class="comments-list">
@@ -191,6 +168,31 @@
                         </div>
                         {{end}}
                     </div>
+
+                    <!-- Comment Form (Now at the bottom) -->
+                    {{if .IsLoggedIn}}
+                    <form action="/comment" method="POST" class="comment-compose" style="margin-top: 2rem;">
+                        <input type="hidden" name="post_id" value="{{.Post.ID}}">
+                        <div class="compose-header">
+                            <div class="compose-avatar">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            </div>
+                            <span class="compose-label">Share your thoughts</span>
+                        </div>
+                        <textarea name="content" class="comment-textarea" placeholder="Write a thoughtful comment..." required></textarea>
+                        <div class="compose-footer">
+                            <button type="submit" class="btn-publish">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                                Post Comment
+                            </button>
+                        </div>
+                    </form>
+                    {{else}}
+                    <div class="login-prompt" style="margin-top: 2rem;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;opacity:0.5;display:block;margin-left:auto;margin-right:auto;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        <a href="/login">Log in</a> or <a href="/register">register</a> to join the discussion.
+                    </div>
+                    {{end}}
                 </div>
             </div>
         </main>

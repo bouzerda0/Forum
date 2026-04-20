@@ -109,6 +109,21 @@ func HomeHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 			db.QueryRow("SELECT COALESCE(value, 0) FROM likes WHERE post_id = ? AND user_id = ?", p.ID, userID).Scan(&p.UserLike)
 		}
 
+		// Fetch Categories for this post
+		catRowsForPost, _ := db.Query(`
+			SELECT c.name FROM categories c
+			JOIN post_categories pc ON c.id = pc.category_id
+			WHERE pc.post_id = ?
+		`, p.ID)
+		if catRowsForPost != nil {
+			for catRowsForPost.Next() {
+				var name string
+				catRowsForPost.Scan(&name)
+				p.Categories = append(p.Categories, name)
+			}
+			catRowsForPost.Close()
+		}
+
 		posts = append(posts, p)
 	}
 	// Fetch Members (registered users)
