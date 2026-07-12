@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zone 01 Oujda - Super App</title>
+    <link rel="stylesheet" href="/static/base.css">
+    <link rel="stylesheet" href="/static/superapp.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="superapp-wrapper">
+        <!-- TOP NAVBAR -->
+        <header class="navbar superapp-navbar">
+            <div class="nav-left">
+                <div class="logo nav-logo">
+                    <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                        <path d="M26 6H6C4.89543 6 4 6.89543 4 8V20C4 21.1046 4.89543 22 6 22H11L9.5 25.5C9.22386 26.1213 9.77614 26.5 10.5 26.5C11.2239 26.5 14.5 22 14.5 22H26C27.1046 22 28 21.1046 28 20V8C28 6.89543 27.1046 6 26 6Z" stroke="#0066FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span>Zone 01 Oujda</span>
+                </div>
+            </div>
+
+            <nav class="nav-links">
+                <a href="/" class="active">Hub</a>
+                <a href="/discussions">Discussions</a>
+            </nav>
+
+            <div class="navbar-right">
+                {{if .IsLoggedIn}}
+                <div class="user-profile">
+                    <div class="user-avatar-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </div>
+                    <span>{{.Username}}</span>
+                </div>
+                <a href="/logout" class="btn-logout">Logout</a>
+                {{else}}
+                <div class="auth-buttons">
+                    <a href="/login" class="btn-login">Login</a>
+                    <a href="/register" class="btn-register">Register</a>
+                </div>
+                {{end}}
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="superapp-main">
+            <!-- Welcome Hero -->
+            <div class="hero-section">
+                <h1 class="hero-title">{{if .IsLoggedIn}}Welcome back, {{.Username}}!{{else}}Welcome to Zone 01 Oujda{{end}}</h1>
+                <p class="hero-subtitle">Your all-in-one superapp for campus life</p>
+            </div>
+
+            <!-- CENTRAL NAVIGATION HUB -->
+            <div class="nav-hub">
+                <div class="hub-grid">
+                    <!-- Module 1: Nexus Transit -->
+                    <a href="/nexus-transit" class="module-card module-transit">
+                        <div class="module-icon-wrap">
+                            <div class="module-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.6-1.3-.9-2.1-.9H5c-.7 0-1.3.3-1.8.8L1.5 8.6C1.2 8.9 1 9.3 1 9.8V16c0 .6.4 1 1 1h2"/>
+                                    <circle cx="7" cy="17.5" r="2.5"/>
+                                    <circle cx="17" cy="17.5" r="2.5"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="module-title">Nexus Transit</h3>
+                        <p class="module-desc">Carpool to campus</p>
+                        <div class="module-footer">
+                            <span class="module-tag">Ride-sharing</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="m9 18 6-6-6-6"/>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <!-- Module 2: Nexus Habitat -->
+                    <a href="/nexus-habitat" class="module-card module-habitat">
+                        <div class="module-icon-wrap">
+                            <div class="module-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                    <polyline points="9 22 9 12 15 12 15 22"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="module-title">Nexus Habitat</h3>
+                        <p class="module-desc">Find roommates</p>
+                        <div class="module-footer">
+                            <span class="module-tag">Colocation</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="m9 18 6-6-6-6"/>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <!-- Module 3: Nexus Pulse -->
+                    <a href="/nexus-pulse" class="module-card module-pulse">
+                        <div class="module-icon-wrap">
+                            <div class="module-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                                    <line x1="6" y1="1" x2="6" y2="4"/>
+                                    <line x1="10" y1="1" x2="10" y2="4"/>
+                                    <line x1="14" y1="1" x2="14" y2="4"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="module-title">Nexus Pulse</h3>
+                        <p class="module-desc">Food orders & events</p>
+                        <div class="module-footer">
+                            <span class="module-tag">Community</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="m9 18 6-6-6-6"/>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <!-- Module 4: Nexus Forum -->
+                    <a href="/nexus-forum" class="module-card module-nexus-forum">
+                        <div class="module-icon-wrap">
+                            <div class="module-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                                    <polyline points="21 15 16 10 5 21"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="module-title">Nexus Forum</h3>
+                        <p class="module-desc">Memes & polls</p>
+                        <div class="module-footer">
+                            <span class="module-tag">Culture</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="m9 18 6-6-6-6"/>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <!-- Module 5: Nexus Spirit & Arena -->
+                    <a href="/nexus-arena" class="module-card module-arena">
+                        <div class="module-icon-wrap">
+                            <div class="module-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 16v-4"/>
+                                    <path d="M12 8h.01"/>
+                                    <circle cx="12" cy="5" r="1"/>
+                                    <path d="M8.5 8.5l2.5 2.5"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="module-title">Spirit & Arena</h3>
+                        <p class="module-desc">Prayer times & sports</p>
+                        <div class="module-footer">
+                            <span class="module-tag">Wellness</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="m9 18 6-6-6-6"/>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <!-- Module 6: Discussions (Legacy Forum) -->
+                    <a href="/discussions" class="module-card module-discussions">
+                        <div class="module-icon-wrap">
+                            <div class="module-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="module-title">Discussions</h3>
+                        <p class="module-desc">Community forum</p>
+                        <div class="module-footer">
+                            <span class="module-tag">Forum</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="m9 18 6-6-6-6"/>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <div class="stat-content">
+                        <span class="stat-number">{{.Stats.Users}}</span>
+                        <span class="stat-label">Active Students</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <div class="stat-content">
+                        <span class="stat-number">{{.Stats.Posts}}</span>
+                        <span class="stat-label">Discussions</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9"/>
+                        <circle cx="7" cy="17.5" r="2.5"/>
+                        <circle cx="17" cy="17.5" r="2.5"/>
+                    </svg>
+                    <div class="stat-content">
+                        <span class="stat-number">{{.Stats.TransitPosts}}</span>
+                        <span class="stat-label">Active Rides</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -26,6 +26,24 @@ func init() {
 		"mod": func(i, j int) int {
 			return i % j
 		},
+		"add": func(a, b int) int {
+			return a + b
+		},
+		"sub": func(a, b int) int {
+			return a - b
+		},
+		"len": func(slice []interface{}) int {
+			return len(slice)
+		},
+		"le": func(a, b int) bool {
+			return a <= b
+		},
+		"lt": func(a, b int) bool {
+			return a < b
+		},
+		"gt": func(a, b int) bool {
+			return a > b
+		},
 	}).ParseGlob("templates/*.html"))
 }
 func RegisterHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
